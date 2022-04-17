@@ -4,23 +4,35 @@ import javax.persistence.*;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
-@Entity
-
+@MappedSuperclass
 public abstract  class User {
     @Id
+    @Column(name = "id")
     private String id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "surname")
     private String surname;
+
+    @Column(name = "login")
     private String login;
+
+    @Column(name = "pass")
     private String password;
+
+    @Column(name = "birthDate")
     private GregorianCalendar birthDate;
+
+    @Column(name = "email")
     private String email;
 
     public String getId() {
         return id;
     }
     public void setId() {
-        this.id = UUID.randomUUID().toString();;
+        this.id = UUID.randomUUID().toString();
     }
 
     public String getName() {
