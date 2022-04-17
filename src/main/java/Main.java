@@ -1,8 +1,21 @@
 import logic.user.StudentUser;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Main {
     public static void main(String[] args) {
-        StudentUser ex = new logic.user.StudentUser();
-        System.out.println(ex.getId());
+        String url = "jdbc:mysql://localhost:3306/pool?serverTimezone=Europe/Minsk&useSSL=false";
+        String username = "root";
+        String password = "qqq122";
+        System.out.println("Connecting...");
+
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            System.out.println("Connection successful!");
+        } catch (SQLException e) {
+            System.out.println("Connection failed!");
+            e.printStackTrace();
+        }
     }
 }
