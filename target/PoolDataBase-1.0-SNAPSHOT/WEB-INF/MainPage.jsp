@@ -1,17 +1,31 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Trying Python
-  Date: 17.04.2022
-  Time: 11:06
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Main page</title>
+    <title>DOCS</title>
 </head>
 <body>
-    First try
-<h2><a href="/edit"> button </a></h2>
+
+<h2>Documents</h2>
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>startDate</th>
+        <th>endDate</th>
+        <th>userId</th>
+    </tr>
+    <c:forEach var="document" items="${documentList}">
+        <tr>
+            <td>${document.id}</td>
+            <td>${document.name}</td>
+            <td>${document.startDate}</td>
+            <td>${document.endDate}</td>
+            <td>${document.userId}</td>
+        </tr>
+    </c:forEach>
+</table>
+
+
 </body>
 </html>

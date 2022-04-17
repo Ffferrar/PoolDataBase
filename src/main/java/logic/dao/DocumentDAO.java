@@ -4,9 +4,11 @@ import logic.docs.Document;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class DocumentDAO {
     private SessionFactory sessionFactory;
 
@@ -14,7 +16,6 @@ public class DocumentDAO {
     public void setSessionFactory(SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
     }
-
 
     public List<Document> allDocs() {
         Session session = sessionFactory.getCurrentSession();

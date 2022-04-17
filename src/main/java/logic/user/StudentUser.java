@@ -7,7 +7,6 @@ import javax.persistence.Column;
 
 @Entity
 @Table(name = "studentuser")
-
 public class StudentUser extends User{
 
     @Column(name = "course")
