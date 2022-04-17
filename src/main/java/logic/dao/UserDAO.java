@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 public interface UserDAO {
-    List<User> allFilms();
+    List<User> allDocs();
     void add(User user);
     void delete(User user);
     void edit(User user);

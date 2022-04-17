@@ -1,13 +1,14 @@
 package logic.dao;
 
 import logic.user.AdminUser;
+import logic.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class AdminUserDAO {
+public class AdminUserDAO implements UserDAO{
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -15,26 +16,31 @@ public class AdminUserDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    public List<AdminUser> allDocs() {
+    @Override
+    public List<User> allDocs() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from AdminUser").list();
     }
 
-    public void add(AdminUser adminUser){
+    @Override
+    public void add(User adminUser){
         Session session = sessionFactory.getCurrentSession();
         session.persist(adminUser);
     }
 
-    public void delete(AdminUser adminUser){
+    @Override
+    public void delete(User adminUser){
         Session session = sessionFactory.getCurrentSession();
         session.delete(adminUser);
     }
 
-    public void edit(AdminUser adminUser) {
+    @Override
+    public void edit(User adminUser) {
         Session session = sessionFactory.getCurrentSession();
         session.update(adminUser);
     }
 
+    @Override
     public AdminUser getById(String id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(AdminUser.class, id);
