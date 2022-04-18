@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class StudentUserDAO implements UserDAO{
+public class StudentUserDAO{
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -19,31 +19,26 @@ public class StudentUserDAO implements UserDAO{
         this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public List<User> allDocs() {
+    public List<StudentUser> allStudents() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from StudentUser").list();
     }
 
-    @Override
-    public void add(User studentUser){
+    public void add(StudentUser studentUser){
         Session session = sessionFactory.getCurrentSession();
         session.persist(studentUser);
     }
 
-    @Override
-    public void delete(User studentUser){
+    public void delete(StudentUser studentUser){
         Session session = sessionFactory.getCurrentSession();
         session.delete(studentUser);
     }
 
-    @Override
-    public void edit(User studentUser) {
+    public void edit(StudentUser studentUser) {
         Session session = sessionFactory.getCurrentSession();
         session.update(studentUser);
     }
 
-    @Override
     public StudentUser getById(String id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(StudentUser.class, id);

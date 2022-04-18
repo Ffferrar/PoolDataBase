@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class GuestUserDAO implements UserDAO{
+public class GuestUserDAO{
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -18,31 +18,26 @@ public class GuestUserDAO implements UserDAO{
         this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public List<User> allDocs() {
+    public List<GuestUser> allGuests() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from GuestUser").list();
     }
 
-    @Override
-    public void add(User guestUser){
+    public void add(GuestUser guestUser){
         Session session = sessionFactory.getCurrentSession();
         session.persist(guestUser);
     }
 
-    @Override
-    public void delete(User guestUser){
+    public void delete(GuestUser guestUser){
         Session session = sessionFactory.getCurrentSession();
         session.delete(guestUser);
     }
 
-    @Override
-    public void edit(User guestUser) {
+    public void edit(GuestUser guestUser) {
         Session session = sessionFactory.getCurrentSession();
         session.update(guestUser);
     }
 
-    @Override
     public GuestUser getById(String id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(GuestUser.class, id);

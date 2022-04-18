@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AdminUserDAO implements UserDAO{
+public class AdminUserDAO{
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -18,31 +18,27 @@ public class AdminUserDAO implements UserDAO{
         this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public List<User> allDocs() {
+
+    public List<User> allAdmins() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from AdminUser").list();
     }
 
-    @Override
-    public void add(User adminUser){
+    public void add(AdminUser adminUser){
         Session session = sessionFactory.getCurrentSession();
         session.persist(adminUser);
     }
 
-    @Override
-    public void delete(User adminUser){
+    public void delete(AdminUser adminUser){
         Session session = sessionFactory.getCurrentSession();
         session.delete(adminUser);
     }
 
-    @Override
-    public void edit(User adminUser) {
+    public void edit(AdminUser adminUser) {
         Session session = sessionFactory.getCurrentSession();
         session.update(adminUser);
     }
 
-    @Override
     public AdminUser getById(String id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(AdminUser.class, id);

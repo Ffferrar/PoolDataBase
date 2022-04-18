@@ -2,7 +2,7 @@ package logic.controller;
 
 import logic.dao.DocumentDAO;
 import logic.docs.Document;
-import logic.service.DocServiceTest;
+import logic.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,17 +15,17 @@ import java.util.List;
 @Controller
 public class TryController {
 
-    private DocServiceTest docServiceTest;
+    private DocumentService documentService;
 
     @Autowired
-    public void setDocServiceTest(DocServiceTest docServiceTest) {
-        this.docServiceTest = docServiceTest;
+    public void setDocumentService(DocumentService documentService) {
+        this.documentService = documentService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allDocs() {
 
-        List<Document> documentList = docServiceTest.allDocs();
+        List<Document> documentList = documentService.allDocs();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("MainPage");
         modelAndView.addObject("documentList", documentList);

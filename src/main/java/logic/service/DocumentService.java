@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class DocServiceTest {
+public class DocumentService {
     private DocumentDAO documentDAO;
 
     @Autowired
