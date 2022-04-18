@@ -24,8 +24,12 @@
             <td>${document.userId}</td>
         </tr>
     </c:forEach>
+    <a href="/edit/${document.id}">edit</a>
 </table>
 
+<h2>Add</h2>
+<c:url value="/add" var="add"/>
+<a href="${add}">Add new film</a>
 
 </body>
 </html>
