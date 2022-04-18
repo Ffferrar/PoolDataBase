@@ -22,6 +22,11 @@ public class DocumentDAO {
         return session.createQuery("from Document").list();
     }
 
+    public List<Document> allDocsById(String userIdParam){
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Document where userId = :userIdParam").list();
+    }
+
     public void add(Document document){
         Session session = sessionFactory.getCurrentSession();
         session.persist(document);

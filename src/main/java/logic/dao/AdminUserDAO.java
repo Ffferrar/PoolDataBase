@@ -19,7 +19,7 @@ public class AdminUserDAO{
     }
 
 
-    public List<User> allAdmins() {
+    public List<AdminUser> allAdmins() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from AdminUser").list();
     }
