@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+@Repository
 public class StudentUserDAO implements UserDAO{
     private SessionFactory sessionFactory;
 

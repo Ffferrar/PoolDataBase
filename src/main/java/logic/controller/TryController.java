@@ -18,7 +18,7 @@ public class TryController {
     private DocServiceTest docServiceTest;
 
     @Autowired
-    public void setFilmService(DocServiceTest docServiceTest) {
+    public void setDocServiceTest(DocServiceTest docServiceTest) {
         this.docServiceTest = docServiceTest;
     }
 

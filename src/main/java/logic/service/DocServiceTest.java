@@ -13,7 +13,7 @@ public class DocServiceTest {
     private DocumentDAO documentDAO;
 
     @Autowired
-    public void setFilmDAO(DocumentDAO documentDAO) {
+    public void setDocumentDAO(DocumentDAO documentDAO) {
         this.documentDAO = documentDAO;
     }
 
