@@ -24,8 +24,7 @@
             <td>${document.userId}</td>
         </tr>
     </c:forEach>
-    <a href="/edit/${document.id}">edit</a>
-</table>
+ы</table>
 
 <h2>Add</h2>
 <c:url value="/add" var="add"/>
