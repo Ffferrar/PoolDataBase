@@ -24,7 +24,7 @@
             <td>${document.userId}</td>
         </tr>
     </c:forEach>
-ы</table>
+</table>
 
 <h2>Add</h2>
 <c:url value="/add" var="add"/>

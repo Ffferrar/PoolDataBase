@@ -8,6 +8,7 @@ import java.util.UUID;
 public abstract  class User {
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "name")
@@ -31,8 +32,8 @@ public abstract  class User {
     public String getId() {
         return id;
     }
-    public void setId() {
-        this.id = UUID.randomUUID().toString();
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
