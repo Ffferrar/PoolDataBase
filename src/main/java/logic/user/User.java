@@ -1,11 +1,16 @@
 package logic.user;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.GregorianCalendar;
+import java.util.Set;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract  class User {
+public abstract  class User implements UserDetails {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +34,13 @@ public abstract  class User {
     @Column(name = "email")
     private String email;
 
+    @Transient
+    private String passwordConfirm;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
+
+
     public String getId() {
         return id;
     }
@@ -36,7 +48,8 @@ public abstract  class User {
         this.id = id;
     }
 
-    public String getName() {
+    @Override
+    public String getUsername() {
         return name;
     }
     public void setName(String name) {
@@ -57,6 +70,7 @@ public abstract  class User {
         this.login = login;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -76,5 +90,37 @@ public abstract  class User {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

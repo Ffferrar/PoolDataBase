@@ -5,6 +5,7 @@ import logic.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,7 +18,6 @@ public class AdminUserDAO{
     public void setSessionFactory(SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
     }
-
 
     public List<AdminUser> allAdmins() {
         Session session = sessionFactory.getCurrentSession();
@@ -42,5 +42,9 @@ public class AdminUserDAO{
     public AdminUser getById(String id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(AdminUser.class, id);
+    }
+    public AdminUser findByUsername(String username){
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(AdminUser.class, username);
     }
 }

@@ -1,5 +1,6 @@
 package logic.dao;
 
+import logic.user.AdminUser;
 import logic.user.GuestUser;
 import logic.user.User;
 import org.hibernate.Session;
@@ -41,5 +42,9 @@ public class GuestUserDAO{
     public GuestUser getById(String id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(GuestUser.class, id);
+    }
+    public GuestUser findByUsername(String username){
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(GuestUser.class, username);
     }
 }
