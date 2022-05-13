@@ -99,6 +99,13 @@ public abstract  class User implements UserDetails {
         this.roles = roles;
     }
 
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
