@@ -66,7 +66,7 @@ public class RegistrationController {
             return modelAndView;
         }
 
-        modelAndView.setViewName("redirect:/");
+        modelAndView.setViewName("redirect:/documentsPage");
         return modelAndView;
     }
 
@@ -101,7 +101,7 @@ public class RegistrationController {
             return modelAndView;
         }
 
-        modelAndView.setViewName("redirect:/");
+        modelAndView.setViewName("redirect:/documentsPage");
         return modelAndView;
     }
 }
