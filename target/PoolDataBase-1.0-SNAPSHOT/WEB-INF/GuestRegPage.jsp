@@ -14,40 +14,37 @@
 </head>
 
 <body>
-<div>
+
+<h2>CHoose</h2>
 <c:url value="/preRegistration" var="pre"/>
 <a href="${pre}">return back</a>
 
-<form:form method="POST" modelAttribute="guestUserForm">
+<div>
+    <c:url value="/guestRegistration" var="guestRegistration"/>
+    <form action=""${var} method="POST" modelAttribute="guestUserForm">
     <h2>Регистрация</h2>
-    <div>
-        <input type="text" path="name" placeholder="Name"></input>
-    </div>
-    <div>
-        <input type="text" path="surname" placeholder="Surname"></input>
-    </div>
-    <div>
-        <input type="date" path="birthDate" placeholder="Date of Birth"></input>
-    </div>
-    <div>
-        <input type="text" path="email" placeholder="Email"></input>
-    </div>
-    <div>
-        <input type="text" path="login" placeholder="Login"></input>
-        <errors path="login"></errors>
+
+        <input type="text" name="name" placeholder="Name"></input>
+
+        <input type="text" name="surname" placeholder="Surname"></input>
+
+        <input type="date" name="birthDate" placeholder="Date of Birth"></input>
+
+        <input type="text" name="email" placeholder="Email"></input>
+
+        <input type="text" name="login" placeholder="Login"></input>
+        <form:errors path="login"></form:errors>
             ${usernameError}
-    </div>
-    <div>
-        <input type="password" path="password" placeholder="Password"></input>
-    </div>
-    <div>
-        <input type="password" path="passwordConfirm"
+
+        <input type="password" name="password" placeholder="Password"></input>
+
+        <input type="password" name="passwordConfirm"
                     placeholder="Confirm your password"></input>
         <errors path="password"></errors>
             ${passwordError}
-    </div>
-    <button type="submit">Зарегистрироваться</button>
-</form:form>
+
+        <input type="submit" value="Submit">
+    </form>
 </div>
 </body>
 </html>

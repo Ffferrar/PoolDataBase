@@ -19,6 +19,7 @@ import java.util.List;
 
 @Service
 public class GuestService implements UserDetailsService{
+    @Autowired
     private GuestUserDAO guestUserDAO;
 
     @PersistenceContext
@@ -59,6 +60,7 @@ public class GuestService implements UserDetailsService{
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         GuestUser guestUser = guestUserDAO.findByUsername(username);
         if (guestUser == null) {
@@ -68,6 +70,7 @@ public class GuestService implements UserDetailsService{
         return guestUser;
     }
 
+    @Transactional
     public boolean saveUser(GuestUser user) {
         GuestUser userFromDB = guestUserDAO.findByUsername(user.getUsername());
 
@@ -81,6 +84,7 @@ public class GuestService implements UserDetailsService{
         return true;
     }
 
+    @Transactional
     public List<GuestUser> usergtList(String idMin) {
         return em.createQuery("SELECT u FROM GuestUser u WHERE u.id > :paramId", GuestUser.class)
                 .setParameter("paramId", idMin).getResultList();

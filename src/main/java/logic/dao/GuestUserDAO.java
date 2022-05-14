@@ -26,7 +26,7 @@ public class GuestUserDAO{
 
     public void add(GuestUser guestUser){
         Session session = sessionFactory.getCurrentSession();
-        session.persist(guestUser);
+        session.merge(guestUser);
     }
 
     public void delete(GuestUser guestUser){

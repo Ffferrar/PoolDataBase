@@ -87,7 +87,7 @@ public class StudentService implements UserDetailsService{
     }
 
     @Transactional
-    public List<StudentUser> usergtList(Long idMin) {
+    public List<StudentUser> usergtList(String idMin) {
         return em.createQuery("SELECT u FROM GuestUser u WHERE u.id > :paramId", StudentUser.class)
                 .setParameter("paramId", idMin).getResultList();
     }

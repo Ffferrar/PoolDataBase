@@ -33,6 +33,12 @@ public class RegistrationController {
         this.studentService = studentService;
     }
 
+    @Autowired
+    public void setGuestService(GuestService guestService) {
+        this.guestService = guestService;
+    }
+
+
     @GetMapping("/preRegistration")
     public ModelAndView preRegistration() {
 
@@ -75,7 +81,7 @@ public class RegistrationController {
             return modelAndView;
         }
 
-        modelAndView.setViewName("redirect:/preRegistration");
+        modelAndView.setViewName("redirect:/");
         studentService.add(studentUser);
         return modelAndView;
     }
@@ -110,19 +116,10 @@ public class RegistrationController {
             modelAndView.setViewName("GuestRegPage");
             return modelAndView;
         }
-        guestService.saveUser(guestUser);
+        guestService.add(guestUser);
 
-        modelAndView.setViewName("redirect:/documentsPage");
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 
-//    @InitBinder
-//    private void dateBinder(WebDataBinder binder) {
-//        //The date format to parse or output your dates
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//        //Create a new CustomDateEditor
-//        CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-//        //Register it as custom editor for the Date type
-//        binder.registerCustomEditor(Date.class, editor);
-//    }
 }

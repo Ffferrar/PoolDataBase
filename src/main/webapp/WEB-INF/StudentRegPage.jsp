@@ -19,7 +19,7 @@
 <a href="${preRegistration}">return back</a>
 
 <div>
-    <c:url value="/guestRegistration" var="guestRegistration"/>
+    <c:url value="/studentRegistration" var="studentRegistration"/>
     <form action="${var}" method="POST" modelAttribute="studentUserForm">
         <h2>Регистрация</h2>
             <input type="text" name="name" placeholder="Name">
