@@ -66,7 +66,8 @@ public class RegistrationController {
             return modelAndView;
         }
 
-        modelAndView.setViewName("redirect:/documentsPage");
+        new StudentService().saveUser(studentUser);
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 
@@ -100,6 +101,7 @@ public class RegistrationController {
             modelAndView.setViewName("GuestRegPage");
             return modelAndView;
         }
+        guestService.saveUser(guestUser);
 
         modelAndView.setViewName("redirect:/documentsPage");
         return modelAndView;

@@ -29,8 +29,8 @@ public class StudentService implements UserDetailsService{
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public void setStudentUserDAO(StudentUserDAO studentUserDAO) {
-        this.studentUserDAO = studentUserDAO;
+    public void StudentService() {
+        this.studentUserDAO = new StudentUserDAO();
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package logic.dao;
 
 import logic.user.AdminUser;
+import logic.user.Role;
 import logic.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
