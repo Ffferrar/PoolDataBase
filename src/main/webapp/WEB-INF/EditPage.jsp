@@ -12,8 +12,6 @@
   <label for="name">Name</label>
   <input type="text" name="name" id="name">
 
-
-
   <label for="userId">User ID</label>
   <input type="text" name="userId" id="userId">
 

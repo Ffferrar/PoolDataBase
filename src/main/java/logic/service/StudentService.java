@@ -1,5 +1,6 @@
 package logic.service;
 
+import logic.dao.DocumentDAO;
 import logic.dao.StudentUserDAO;
 import logic.user.AdminUser;
 import logic.user.GuestUser;
@@ -29,7 +30,7 @@ public class StudentService implements UserDetailsService{
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public void StudentService() {
+    public void setStudentUserDAO(StudentUserDAO studentUserDAO) {
         this.studentUserDAO = new StudentUserDAO();
     }
 

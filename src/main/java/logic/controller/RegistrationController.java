@@ -1,6 +1,7 @@
 package logic.controller;
 
 import logic.service.AdminService;
+import logic.service.DocumentService;
 import logic.service.GuestService;
 import logic.service.StudentService;
 import logic.user.GuestUser;
@@ -24,6 +25,11 @@ public class RegistrationController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    public void setStudentService(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("/preRegistration")
     public ModelAndView preRegistration() {
@@ -52,6 +58,7 @@ public class RegistrationController {
 
 
         if (bindingResult.hasErrors()) {
+            modelAndView.addObject("pabindingError", "Ошибка");
             modelAndView.setViewName("StudentRegPage");
             return modelAndView;
         }
@@ -66,8 +73,8 @@ public class RegistrationController {
             return modelAndView;
         }
 
-        new StudentService().saveUser(studentUser);
-        modelAndView.setViewName("redirect:/");
+        modelAndView.setViewName("redirect:/preRegistration");
+        studentService.add(studentUser);
         return modelAndView;
     }
 

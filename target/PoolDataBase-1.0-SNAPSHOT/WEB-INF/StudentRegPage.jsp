@@ -19,42 +19,34 @@
 <a href="${preRegistration}">return back</a>
 
 <div>
-    <form:form method="POST" modelAttribute="studentUserForm">
+    <c:url value="/guestRegistration" var="guestRegistration"/>
+    <form action="${var}" method="POST" modelAttribute="studentUserForm">
         <h2>Регистрация</h2>
-        <div>
-            <input type="text" path="name" placeholder="Name"></input>
-        </div>
-        <div>
-            <input type="text" path="surname" placeholder="Surname"></input>
-        </div>
-        <div>
-            <input type="date" path="birthDate" placeholder="Date of Birth"></input>
-        </div>
-        <div>
-            <input type="text" path="email" placeholder="Email"></input>
-        </div>
-        <div>
-            <input type="text" path="department" placeholder="Department"></input>
-        </div>
-        <div>
-            <input type="text" path="course" placeholder="Course"></input>
-        </div>
-        <div>
-            <input type="text" path="login" placeholder="Login"></input>
+            <input type="text" name="name" placeholder="Name">
+
+            <input type="text" name="surname" placeholder="Surname">
+
+            <input type="date" name="birthDate" placeholder="Date of Birth">
+
+            <input type="text" name="email" placeholder="Email">
+
+            <input type="text" name="department" placeholder="Department">
+
+            <input type="text" name="course" placeholder="Course">
+
+            <input type="text" name="login" placeholder="Login">
             <form:errors path="login"></form:errors>
                 ${usernameError}
-        </div>
-        <div>
-            <input type="password" path="password" placeholder="Password"></input>
-        </div>
-        <div>
-            <input type="password" path="passwordConfirm"
-                        placeholder="Confirm your password"></input>
+
+            <input type="password" name="password" placeholder="Password">
+
+            <input type="password" name="passwordConfirm"
+                        placeholder="Confirm your password">
             <errors path="password"></errors>
                 ${passwordError}
-        </div>
+
         <input type="submit" value="Submit">
-    </form:form>
+    </form>
 </div>
 </body>
 </html>
