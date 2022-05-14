@@ -21,6 +21,7 @@ import java.util.List;
 
 @Service
 public class StudentService implements UserDetailsService{
+    @Autowired
     private StudentUserDAO studentUserDAO;
 
     @PersistenceContext
@@ -31,7 +32,7 @@ public class StudentService implements UserDetailsService{
 
     @Autowired
     public void setStudentUserDAO(StudentUserDAO studentUserDAO) {
-        this.studentUserDAO = new StudentUserDAO();
+        this.studentUserDAO = studentUserDAO;
     }
 
     @Transactional
@@ -61,6 +62,7 @@ public class StudentService implements UserDetailsService{
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         StudentUser studentUser = studentUserDAO.findByUsername(username);
         if (studentUser == null) {
@@ -70,6 +72,7 @@ public class StudentService implements UserDetailsService{
         return studentUser;
     }
 
+    @Transactional
     public boolean saveUser(StudentUser user) {
         StudentUser userFromDB = studentUserDAO.findByUsername(user.getUsername());
 
@@ -83,8 +86,9 @@ public class StudentService implements UserDetailsService{
         return true;
     }
 
-    public List<GuestUser> usergtList(String idMin) {
-        return em.createQuery("SELECT u FROM GuestUser u WHERE u.id > :paramId", GuestUser.class)
+    @Transactional
+    public List<StudentUser> usergtList(Long idMin) {
+        return em.createQuery("SELECT u FROM GuestUser u WHERE u.id > :paramId", StudentUser.class)
                 .setParameter("paramId", idMin).getResultList();
     }
 }

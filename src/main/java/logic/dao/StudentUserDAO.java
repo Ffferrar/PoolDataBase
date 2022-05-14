@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -27,7 +28,7 @@ public class StudentUserDAO{
 
     public void add(StudentUser studentUser){
         Session session = sessionFactory.getCurrentSession();
-        session.persist(studentUser);
+        session.merge(studentUser);
     }
 
     public void delete(StudentUser studentUser){
@@ -45,8 +46,8 @@ public class StudentUserDAO{
         return session.get(StudentUser.class, id);
     }
 
-    public StudentUser findByUsername(String username){
+    public StudentUser findByUsername(String name){
         Session session = sessionFactory.getCurrentSession();
-        return session.get(StudentUser.class, username);
+        return session.get(StudentUser.class, name);
     }
 }

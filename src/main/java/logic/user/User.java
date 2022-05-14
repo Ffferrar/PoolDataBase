@@ -4,10 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.GregorianCalendar;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @MappedSuperclass
 public abstract  class User implements UserDetails {
@@ -29,7 +26,7 @@ public abstract  class User implements UserDetails {
     private String password;
 
     @Column(name = "birthDate")
-    private GregorianCalendar birthDate;
+    private String birthDate;
 
     @Column(name = "email")
     private String email;
@@ -78,10 +75,10 @@ public abstract  class User implements UserDetails {
         this.password = password;
     }
 
-    public GregorianCalendar getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
-    public void setBirthDate(GregorianCalendar birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
