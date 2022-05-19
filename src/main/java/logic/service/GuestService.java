@@ -1,7 +1,7 @@
 package logic.service;
 
 import logic.dao.GuestUserDAO;
-import logic.user.AdminUser;
+//import logic.user.AdminUser;
 import logic.user.GuestUser;
 import logic.user.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,34 +33,28 @@ public class GuestService implements UserDetailsService{
         this.guestUserDAO = guestUserDAO;
     }
 
-    @Transactional
     public List<GuestUser> allGuests() {
         return guestUserDAO.allGuests();
     }
 
-    @Transactional
     public void add(GuestUser guestUser) {
         guestUserDAO.add(guestUser);
     }
 
-    @Transactional
     public boolean delete(GuestUser guestUser) {
         guestUserDAO.delete(guestUser);
         return true;
     }
 
-    @Transactional
     public void edit(GuestUser guestUser) {
         guestUserDAO.edit(guestUser);
     }
 
-    @Transactional
     public GuestUser getById(String id) {
         return guestUserDAO.getById(id);
     }
 
     @Override
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         GuestUser guestUser = guestUserDAO.findByUsername(username);
         if (guestUser == null) {
@@ -70,7 +64,6 @@ public class GuestService implements UserDetailsService{
         return guestUser;
     }
 
-    @Transactional
     public boolean saveUser(GuestUser user) {
         GuestUser userFromDB = guestUserDAO.findByUsername(user.getUsername());
 
@@ -84,7 +77,6 @@ public class GuestService implements UserDetailsService{
         return true;
     }
 
-    @Transactional
     public List<GuestUser> usergtList(String idMin) {
         return em.createQuery("SELECT u FROM GuestUser u WHERE u.id > :paramId", GuestUser.class)
                 .setParameter("paramId", idMin).getResultList();

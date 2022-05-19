@@ -1,14 +1,20 @@
 package logic.config;
-import logic.service.AdminService;
+//import logic.service.AdminService;
+import logic.service.GuestService;
+import logic.service.StudentService;
+import logic.user.GuestUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -17,7 +23,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    AdminService userService;
+    StudentService userService;
+
+    @Autowired
+    GuestService guestService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -53,8 +62,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/");
     }
 
+    @Order(1)
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
+    }
+
+    @Order(2)
+    @Autowired
+    protected void configureGlobal2(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(guestService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

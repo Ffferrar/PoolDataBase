@@ -1,6 +1,6 @@
 package logic.dao;
 
-import logic.user.AdminUser;
+//import logic.user.AdminUser;
 import logic.user.GuestUser;
 import logic.user.User;
 import org.hibernate.Session;
@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -43,6 +44,7 @@ public class GuestUserDAO{
         Session session = sessionFactory.getCurrentSession();
         return session.get(GuestUser.class, id);
     }
+
     public GuestUser findByUsername(String username){
         Session session = sessionFactory.getCurrentSession();
         return session.get(GuestUser.class, username);

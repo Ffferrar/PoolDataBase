@@ -2,7 +2,7 @@ package logic.service;
 
 import logic.dao.DocumentDAO;
 import logic.dao.StudentUserDAO;
-import logic.user.AdminUser;
+//import logic.user.AdminUser;
 import logic.user.GuestUser;
 import logic.user.Role;
 import logic.user.StudentUser;
@@ -35,34 +35,28 @@ public class StudentService implements UserDetailsService{
         this.studentUserDAO = studentUserDAO;
     }
 
-    @Transactional
     public List<StudentUser> allStudents() {
         return studentUserDAO.allStudents();
     }
 
-    @Transactional
     public void add(StudentUser studentUser) {
         studentUserDAO.add(studentUser);
     }
 
-    @Transactional
     public boolean delete(StudentUser studentUser) {
         studentUserDAO.delete(studentUser);
         return true;
     }
 
-    @Transactional
     public void edit(StudentUser studentUser) {
         studentUserDAO.edit(studentUser);
     }
 
-    @Transactional
     public StudentUser getById(String id) {
         return studentUserDAO.getById(id);
     }
 
     @Override
-    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         StudentUser studentUser = studentUserDAO.findByUsername(username);
         if (studentUser == null) {
@@ -72,7 +66,6 @@ public class StudentService implements UserDetailsService{
         return studentUser;
     }
 
-    @Transactional
     public boolean saveUser(StudentUser user) {
         StudentUser userFromDB = studentUserDAO.findByUsername(user.getUsername());
 
@@ -86,7 +79,6 @@ public class StudentService implements UserDetailsService{
         return true;
     }
 
-    @Transactional
     public List<StudentUser> usergtList(String idMin) {
         return em.createQuery("SELECT u FROM GuestUser u WHERE u.id > :paramId", StudentUser.class)
                 .setParameter("paramId", idMin).getResultList();

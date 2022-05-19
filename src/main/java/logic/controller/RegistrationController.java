@@ -1,6 +1,6 @@
 package logic.controller;
 
-import logic.service.AdminService;
+//import logic.service.AdminService;
 import logic.service.DocumentService;
 import logic.service.GuestService;
 import logic.service.StudentService;
@@ -40,86 +40,61 @@ public class RegistrationController {
 
 
     @GetMapping("/preRegistration")
-    public ModelAndView preRegistration() {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("preRegPage");
-
-        return modelAndView;
+    public String preRegistration(Model model) {
+        return "preRegPage";
     }
 
     @GetMapping("/studentRegistration")
-    public ModelAndView studentRegistration() {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("StudentRegPage");
-
-        modelAndView.addObject("studentUserForm", new StudentUser());
-
-        return modelAndView;
+    public String studentRegistration(Model model) {
+        model.addAttribute("studentUserForm", new StudentUser());
+        return "StudentRegPage";
     }
 
     @PostMapping("/studentRegistration")
-    public ModelAndView addStudentUser(@ModelAttribute("studentUserForm") StudentUser studentUser, BindingResult bindingResult) {
-
-        ModelAndView modelAndView = new ModelAndView();
+    public String addStudentUser(@ModelAttribute("studentUserForm") StudentUser studentUser, BindingResult bindingResult, Model model) {
 
 
         if (bindingResult.hasErrors()) {
-            modelAndView.addObject("pabindingError", "Ошибка");
-            modelAndView.setViewName("StudentRegPage");
-            return modelAndView;
+            model.addAttribute("pabindingError", "Ошибка");
+            return "StudentRegPage";
         }
         if (!studentUser.getPassword().equals(studentUser.getPasswordConfirm())){
-            modelAndView.addObject("passwordError", "Пароли не совпадают");
-            modelAndView.setViewName("StudentRegPage");
-            return modelAndView;
+            model.addAttribute("passwordError", "Пароли не совпадают");
+            return "StudentRegPage";
         }
         if (!studentService.saveUser(studentUser)){
-            modelAndView.addObject("usernameError", "Пользователь с таким именем уже существует");
-            modelAndView.setViewName("StudentRegPage");
-            return modelAndView;
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            return "StudentRegPage";
         }
 
-        modelAndView.setViewName("redirect:/");
         studentService.add(studentUser);
-        return modelAndView;
+        return "redirect:/";
     }
 
     @GetMapping("/guestRegistration")
-    public ModelAndView guestRegistration() {
+    public String guestRegistration(Model model) {
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("GuestRegPage");
-
-        modelAndView.addObject("guestUserForm", new GuestUser());
-
-        return modelAndView;
+        model.addAttribute("guestUserForm", new GuestUser());
+        return "GuestRegPage";
     }
 
     @PostMapping("/guestRegistration")
-    public ModelAndView addGuestUser(@ModelAttribute("guestUserForm") GuestUser guestUser, BindingResult bindingResult) {
-
-        ModelAndView modelAndView = new ModelAndView();
+    public String addGuestUser(@ModelAttribute("guestUserForm") GuestUser guestUser, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("GuestRegPage");
-            return modelAndView;
+            return "GuestRegPage";
         }
         if (!guestUser.getPassword().equals(guestUser.getPasswordConfirm())){
-            modelAndView.addObject("passwordError", "Пароли не совпадают");
-            modelAndView.setViewName("GuestRegPage");
-            return modelAndView;
+            model.addAttribute("passwordError", "Пароли не совпадают");
+            return "GuestRegPage";
         }
         if (!guestService.saveUser(guestUser)){
-            modelAndView.addObject("usernameError", "Пользователь с таким именем уже существует");
-            modelAndView.setViewName("GuestRegPage");
-            return modelAndView;
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            return "GuestRegPage";
         }
         guestService.add(guestUser);
 
-        modelAndView.setViewName("redirect:/");
-        return modelAndView;
+        return "redirect:/";
     }
 
 }

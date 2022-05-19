@@ -46,8 +46,10 @@ public class StudentUserDAO{
         return session.get(StudentUser.class, id);
     }
 
+    //@Transactional
     public StudentUser findByUsername(String name){
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.
+                getCurrentSession();
         return session.get(StudentUser.class, name);
     }
 }

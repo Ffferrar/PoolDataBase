@@ -17,27 +17,22 @@ public class DocumentService {
         this.documentDAO = documentDAO;
     }
 
-    @Transactional
     public List<Document> allDocs() {
         return documentDAO.allDocs();
     }
 
-    @Transactional
     public void add(Document document) {
         documentDAO.add(document);
     }
 
-    @Transactional
     public void delete(Document document) {
         documentDAO.delete(document);
     }
 
-    @Transactional
     public void edit(Document document) {
         documentDAO.edit(document);
     }
 
-    @Transactional
     public Document getById(String id) {
         return documentDAO.getById(id);
     }
