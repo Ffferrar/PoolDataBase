@@ -10,7 +10,7 @@
 
 <body>
 <sec:authorize access="isAuthenticated()">
-    <% response.sendRedirect("/"); %>
+    <% response.sendRedirect("/startPage"); %>
 </sec:authorize>
 <div>
     <form method="POST" action="/login">

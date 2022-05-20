@@ -18,8 +18,6 @@
   <label for="image">User ID</label>
   <input type="file" name="file" id="image">
 
-  <input type="submit" value="Upload">
-
   <input type="submit" value="Edit document">
 </form>
 </body>

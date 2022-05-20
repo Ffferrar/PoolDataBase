@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ViewResolver;
@@ -40,13 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/add").not().fullyAuthenticated()
+                .antMatchers("/preRegistration").not().fullyAuthenticated()
                 .antMatchers("/studentRegistration").not().fullyAuthenticated()
                 .antMatchers("/guestRegistration").not().fullyAuthenticated()
                 //Доступ только для пользователей с ролью Администратор
                 .antMatchers("/adminPage/**").hasRole("ADMIN")
                 //Доступ разрешен всем пользователей
-                .antMatchers("/preRegistration").permitAll()
+                .antMatchers("/startpage").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()
@@ -54,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 //Перенаправление на главную страницу после успешного входа
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/startpage")
                 .permitAll()
                 .and()
                 .logout()

@@ -3,7 +3,10 @@ package logic.controller;
 import logic.dao.DocumentDAO;
 import logic.docs.Document;
 import logic.service.DocumentService;
+import logic.user.StudentUser;
+import logic.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -12,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,11 +29,20 @@ public class AdminMPController{
     }
 
     @GetMapping("/")
-    public String allDocs(Model modelAndView) {
+    public String allDocs(@AuthenticationPrincipal User user, Model modelAndView) {
 
+        modelAndView.addAttribute("UserName", user.getUsername());
         List<Document> documentList = documentService.allDocs();
-        modelAndView.addAttribute("documentList", documentList);
+        List<Document> finalList = new ArrayList<>();
 
+        for (int i = 0; i < documentList.size(); i++){
+            if (user.getId().equals(documentList.get(i).getUserId())){
+                //System.out.println(user.getId());
+                finalList.add(documentList.get(i));
+            }
+        }
+
+        modelAndView.addAttribute("documentList", finalList);
         return "MainPage";
     }
 
@@ -48,14 +61,14 @@ public class AdminMPController{
 
     @GetMapping("/add")
     public String addPage(Model model) {
+        model.addAttribute("document", new Document());
         return "EditPage";
     }
 
     @PostMapping("/add")
-    public String addFilm(@RequestParam("file") MultipartFile file, @ModelAttribute("document") Document document, Model model) {
-        Document doc = new Document();
+    public String addFilm(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal User user, @ModelAttribute("document") Document doc, Model model) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        doc.setName(fileName);
+        doc.setUserId(user.getId());
         try {
             doc.setImage(file.getBytes());
         } catch (IOException e) {
