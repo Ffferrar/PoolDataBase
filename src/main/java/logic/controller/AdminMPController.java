@@ -39,7 +39,7 @@ public class AdminMPController{
 
     @PostMapping("/edit")
     public String editFilm(@ModelAttribute("document") Document document, Model model) {
-        documentService.edit(document);
+        //documentService.edit(document);
         return "redirect:/";
     }
 
