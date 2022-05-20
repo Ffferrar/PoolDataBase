@@ -92,7 +92,7 @@ public class RegistrationController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "GuestRegPage";
         }
-        guestService.add(guestUser);
+        guestService.saveUser(guestUser);
 
         return "redirect:/";
     }

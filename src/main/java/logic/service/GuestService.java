@@ -4,6 +4,7 @@ import logic.dao.GuestUserDAO;
 //import logic.user.AdminUser;
 import logic.user.GuestUser;
 import logic.user.Role;
+import logic.user.StudentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GuestService implements UserDetailsService{
@@ -34,29 +36,17 @@ public class GuestService implements UserDetailsService{
     }
 
     public List<GuestUser> allGuests() {
-        return guestUserDAO.allGuests();
-    }
-
-    public void add(GuestUser guestUser) {
-        guestUserDAO.add(guestUser);
-    }
-
-    public boolean delete(GuestUser guestUser) {
-        guestUserDAO.delete(guestUser);
-        return true;
-    }
-
-    public void edit(GuestUser guestUser) {
-        guestUserDAO.edit(guestUser);
+        return guestUserDAO.findAll();
     }
 
     public GuestUser getById(String id) {
-        return guestUserDAO.getById(id);
+        Optional<GuestUser> userFromDb = guestUserDAO.findById(id);
+        return userFromDb.orElse(new GuestUser());
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        GuestUser guestUser = guestUserDAO.findByUsername(username);
+        GuestUser guestUser = guestUserDAO.findByName(username);
         if (guestUser == null) {
             throw new UsernameNotFoundException("User not found");
         }
@@ -65,7 +55,7 @@ public class GuestService implements UserDetailsService{
     }
 
     public boolean saveUser(GuestUser user) {
-        GuestUser userFromDB = guestUserDAO.findByUsername(user.getUsername());
+        GuestUser userFromDB = guestUserDAO.findByName(user.getUsername());
 
         if (userFromDB != null) {
             return false;
@@ -73,7 +63,7 @@ public class GuestService implements UserDetailsService{
 
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        guestUserDAO.add(user);
+        guestUserDAO.save(user);
         return true;
     }
 
