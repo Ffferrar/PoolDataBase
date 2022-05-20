@@ -47,7 +47,7 @@ public class HibernateConfig {
     }
 
     //для создания сессий с сущностями
-    @Bean
+    @Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory(){
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());

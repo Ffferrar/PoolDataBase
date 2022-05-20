@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //Доступ только для не зарегистрированных пользователей
-                .antMatchers("/preRegistration").not().fullyAuthenticated()
+                .antMatchers("/add").not().fullyAuthenticated()
                 .antMatchers("/studentRegistration").not().fullyAuthenticated()
                 .antMatchers("/guestRegistration").not().fullyAuthenticated()
                 //Доступ только для пользователей с ролью Администратор
@@ -62,13 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/");
     }
 
-    @Order(1)
+    @Primary
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
 
-    @Order(2)
     @Autowired
     protected void configureGlobal2(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(guestService).passwordEncoder(bCryptPasswordEncoder());

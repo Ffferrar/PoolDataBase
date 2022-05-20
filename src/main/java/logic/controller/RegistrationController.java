@@ -67,7 +67,7 @@ public class RegistrationController {
             return "StudentRegPage";
         }
 
-        studentService.add(studentUser);
+        studentService.saveUser(studentUser);
         return "redirect:/";
     }
 
