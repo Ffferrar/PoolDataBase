@@ -37,7 +37,6 @@ public class AdminMPController{
 
         for (int i = 0; i < documentList.size(); i++){
             if (user.getId().equals(documentList.get(i).getUserId())){
-                //System.out.println(user.getId());
                 finalList.add(documentList.get(i));
             }
         }
@@ -74,7 +73,6 @@ public class AdminMPController{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         documentService.add(doc);
         return "redirect:/";
     }

@@ -68,7 +68,7 @@ public class RegistrationController {
         }
 
         studentService.saveUser(studentUser);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @GetMapping("/guestRegistration")
@@ -94,7 +94,7 @@ public class RegistrationController {
         }
         guestService.saveUser(guestUser);
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 }

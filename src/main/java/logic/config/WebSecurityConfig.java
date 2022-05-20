@@ -55,22 +55,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 //Перенаправление на главную страницу после успешного входа
-                .defaultSuccessUrl("/startpage")
+                .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/startpage");
     }
 
     @Primary
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
-    }
-
-    @Autowired
-    protected void configureGlobal2(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(guestService).passwordEncoder(bCryptPasswordEncoder());
     }
+
+//    @Autowired
+//    protected void configureGlobal2(AuthenticationManagerBuilder auth) throws Exception {
+//
+//    }
 }

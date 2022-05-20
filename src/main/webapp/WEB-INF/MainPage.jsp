@@ -34,5 +34,9 @@
 <c:url value="/add" var="add"/>
 <a href="${add}">Add new film</a>
 
+
+<sec:authorize access="isAuthenticated()">
+    <h4><a href="/logout">Выйти</a></h4>
+</sec:authorize>
 </body>
 </html>
