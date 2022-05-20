@@ -6,7 +6,7 @@
 </head>
 <body>
 <c:url value="/add" var="var"/>
-<form action="${var}" method="POST">
+<form action="${var}" method="POST" enctype="multipart/form-data">
   <input type="hidden" name="id" value="${document.id}">
 
   <label for="name">Name</label>
@@ -14,6 +14,11 @@
 
   <label for="userId">User ID</label>
   <input type="text" name="userId" id="userId">
+
+  <label for="image">User ID</label>
+  <input type="file" name="file" id="image">
+
+  <input type="submit" value="Upload">
 
   <input type="submit" value="Edit document">
 </form>

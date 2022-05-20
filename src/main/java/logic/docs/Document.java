@@ -1,9 +1,6 @@
 package logic.docs;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.File;
 import java.util.GregorianCalendar;
 import java.util.UUID;
@@ -12,6 +9,7 @@ import java.util.UUID;
 @Table(name = "documents")
 public class Document {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private String id;
 
@@ -25,7 +23,7 @@ public class Document {
     private GregorianCalendar endDate;
 
     @Column(name = "image")
-    private File image;
+    private byte[] image;
 
     @Column(name = "userId")
     private String userId;
@@ -36,7 +34,7 @@ public class Document {
         return id;
     }
     public void setId(String id) {
-        this.id = UUID.randomUUID().toString();;
+        this.id = id;
     }
 
     public String getName() {
@@ -60,10 +58,10 @@ public class Document {
         this.endDate = endDate;
     }
 
-    public File getImage() {
+    public byte[] getImage() {
         return image;
     }
-    public void setImage(File image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
