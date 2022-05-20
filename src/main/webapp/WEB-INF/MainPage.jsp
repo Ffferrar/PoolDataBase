@@ -26,6 +26,7 @@
             <td>${document.startDate}</td>
             <td>${document.endDate}</td>
             <td>${document.userId}</td>
+            <td><a href="/docs/${document.id}">Скачать</a></td>
         </tr>
     </c:forEach>
 </table>

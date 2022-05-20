@@ -6,6 +6,9 @@ import logic.service.DocumentService;
 import logic.user.StudentUser;
 import logic.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,7 +76,16 @@ public class AdminMPController{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(doc.getImage() + "TESTESTEST");
         documentService.add(doc);
         return "redirect:/";
     }
+
+//    @GetMapping("/docs/{id}")
+//    public ResponseEntity downloadFromDB(@PathVariable("id") String id) {
+//        Document document = documentService.getById(id);
+//        System.out.println(document.getImage() + document.getName());
+//        return ResponseEntity.ok()
+//                .body(document.getImage());
+//    }
 }
