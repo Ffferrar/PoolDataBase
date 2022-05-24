@@ -19,6 +19,9 @@ import java.util.Properties;
 @ComponentScan(basePackages = "logic")
 @EnableTransactionManagement //для транзакций
 @PropertySource(value = "classpath:DataBase.properties")
+/**
+ * Класс конфигурации соединений с БД
+ */
 public class HibernateConfig {
     private Environment environment; // получаем данные из properties
 
@@ -27,7 +30,7 @@ public class HibernateConfig {
         this.environment = environment;
     }
 
-    //устанавливаем св-ва hibernate
+    /** Устанавливает св-ва hibernate **/
     private Properties hibernateProperties(){
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
@@ -35,7 +38,7 @@ public class HibernateConfig {
         return properties;
     }
 
-    //создаем соединение с БД
+    /** Создает соединение с БД **/
     @Bean
     public DataSource dataSource(){
         BasicDataSource dataSource = new BasicDataSource();
@@ -46,7 +49,7 @@ public class HibernateConfig {
         return dataSource;
     }
 
-    //для создания сессий с сущностями
+    /** Для создания сессий с сущностями **/
     @Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory(){
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -56,7 +59,7 @@ public class HibernateConfig {
         return sessionFactory;
     }
 
-    //менеджер транзакций
+    /** Менеджер транзакций **/
     @Bean
     public HibernateTransactionManager transactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();

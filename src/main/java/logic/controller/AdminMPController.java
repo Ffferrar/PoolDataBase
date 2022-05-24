@@ -21,16 +21,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Контроллер основной страницы с документами
+ * Также отвечает за addPage
+ */
 @Controller
 public class AdminMPController{
 
     private DocumentService documentService;
 
+    /** Сеттерр documentService**/
     @Autowired
     public void setDocumentService(DocumentService documentService) {
         this.documentService = documentService;
     }
 
+    /** @return Страницу из списка документов по id пользователя
+     * ID берет из AuthenticationPrincipal
+     * **/
     @GetMapping("/")
     public String allDocs(@AuthenticationPrincipal User user, Model modelAndView) {
 
@@ -61,12 +69,14 @@ public class AdminMPController{
         return "redirect:/";
     }
 
+    /** @return Возвращает страницу для создания документов**/
     @GetMapping("/add")
     public String addPage(Model model) {
         model.addAttribute("document", new Document());
         return "EditPage";
     }
 
+    /** @return Возвращает страницу с документами с новой записью**/
     @PostMapping("/add")
     public String addFilm(@RequestParam("file") MultipartFile file, @AuthenticationPrincipal User user, @ModelAttribute("document") Document doc, Model model) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -76,16 +86,8 @@ public class AdminMPController{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(doc.getImage() + "TESTESTEST");
         documentService.add(doc);
         return "redirect:/";
     }
 
-//    @GetMapping("/docs/{id}")
-//    public ResponseEntity downloadFromDB(@PathVariable("id") String id) {
-//        Document document = documentService.getById(id);
-//        System.out.println(document.getImage() + document.getName());
-//        return ResponseEntity.ok()
-//                .body(document.getImage());
-//    }
 }

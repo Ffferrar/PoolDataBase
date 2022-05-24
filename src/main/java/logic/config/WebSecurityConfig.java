@@ -20,6 +20,10 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ * Класс-конфигуратор для настройки параметров безопасности
+ */
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -29,11 +33,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     GuestService guestService;
 
+    /** Шифровальщик паролей**/
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /** Устанавливет доступ к страницам по ролям**/
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity

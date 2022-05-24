@@ -7,6 +7,10 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ * Класс-конфигуратор для установки пути к jsp файлам
+ */
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "logic")

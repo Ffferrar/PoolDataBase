@@ -22,6 +22,9 @@ import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Контроллер для регистрации пользователей
+ */
 @Controller
 public class RegistrationController {
 
@@ -38,12 +41,13 @@ public class RegistrationController {
         this.guestService = guestService;
     }
 
-
+    /** @return Возвращает страницу выбора статуса: гость или студент **/
     @GetMapping("/preRegistration")
     public String preRegistration(Model model) {
         return "preRegPage";
     }
 
+    /** Возвращает страницу регистрации для студента**/
     @GetMapping("/studentRegistration")
     public String studentRegistration(Model model) {
         model.addAttribute("studentUserForm", new StudentUser());
@@ -71,6 +75,7 @@ public class RegistrationController {
         return "redirect:/login";
     }
 
+    /** Возвращает страницу регистрации для гостя**/
     @GetMapping("/guestRegistration")
     public String guestRegistration(Model model) {
 
