@@ -24,6 +24,7 @@ import java.util.Date;
 
 /**
  * Контроллер для регистрации пользователей
+ * @author lyolyaburlakova
  */
 @Controller
 public class RegistrationController {
